@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact | Portfolio Builder</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body id="contactPage">
+  <header>
+    <nav>
+      <h1>Portfolio Builder</h1>
+      <ul>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="skills.html">Skills</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="achievements.html">Achievements</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+        <li><a href="resume.html">View My Resume</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="section">
+    <h2>Enter Your Contact Details</h2>
+    <form id="contactForm">
+      <label for="email">Email:</label>
+      <input type="email" id="email" placeholder="you@example.com" />
+
+      <label for="phone">Phone:</label>
+      <input type="tel" id="phone" placeholder="+91 9876543210" />
+
+      <label for="linkedin">LinkedIn:</label>
+      <input type="url" id="linkedin" placeholder="https://linkedin.com/in/your-profile" />
+
+      <label for="github">GitHub:</label>
+      <input type="url" id="github" placeholder="https://github.com/your-username" />
+
+      <button type="button" onclick="previewContact()">Preview</button>
+    </form>
+
+    <div id="contactPreview"></div>
+  </section>
+
+  <script>
+    function saveContactData() {
+      const data = {
+        email: document.getElementById("email").value.trim(),
+        phone: document.getElementById("phone").value.trim(),
+        linkedin: document.getElementById("linkedin").value.trim(),
+        github: document.getElementById("github").value.trim(),
+      };
+      localStorage.setItem("contactData", JSON.stringify(data));
+    }
+
+    function loadContactData() {
+      const data = JSON.parse(localStorage.getItem("contactData"));
+      if (data) {
+        document.getElementById("email").value = data.email || "";
+        document.getElementById("phone").value = data.phone || "";
+        document.getElementById("linkedin").value = data.linkedin || "";
+        document.getElementById("github").value = data.github || "";
+      }
+    }
+
+    function previewContact() {
+      const email = document.getElementById("email").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const linkedin = document.getElementById("linkedin").value.trim();
+      const github = document.getElementById("github").value.trim();
+
+      if (!email && !phone && !linkedin && !github) {
+        alert("Please enter at least one contact detail to preview.");
+        return;
+      }
+
+      saveContactData();
+
+      const preview = document.getElementById("contactPreview");
+      preview.innerHTML = `
+        <h3>Your Contact Preview:</h3>
+        ${email ? `<p><strong>Email:</strong> ${email}</p>` : ""}
+        ${phone ? `<p><strong>Phone:</strong> ${phone}</p>` : ""}
+        ${linkedin ? `<p><strong>LinkedIn:</strong> <a href="${linkedin}" target="_blank">${linkedin}</a></p>` : ""}
+        ${github ? `<p><strong>GitHub:</strong> <a href="${github}" target="_blank">${github}</a></p>` : ""}
+      `;
+    }
+
+    document.addEventListener("DOMContentLoaded", loadContactData);
+  </script>
+ <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const contactData = JSON.parse(localStorage.getItem("contactData")) || {};
+    const container = document.getElementById("contactDetails");
+
+    container.innerHTML = `
+      <p><strong>Email:</strong> ${contactData.email || "Not provided"}</p>
+      <p><strong>Phone:</strong> ${contactData.phone || "Not provided"}</p>
+      <p><strong>LinkedIn:</strong> ${contactData.linkedin ? `<a href="${contactData.linkedin}" target="_blank">${contactData.linkedin}</a>` : "Not provided"}</p>
+      <p><strong>GitHub:</strong> ${contactData.github ? `<a href="${contactData.github}" target="_blank">${contactData.github}</a>` : "Not provided"}</p>
+    `;
+  });
+</script>
+
+</script>
+
+</body>
+</html>

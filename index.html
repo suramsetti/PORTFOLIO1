@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Portfolio Website</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <h1>User Portfolio Builder</h1>
+      <ul>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="skills.html">Skills</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="achievements.html">Achievements</a></li>
+        <li><a href="contact.html">Contact</a></li>
+         <li><a href="resume.html">View My Resume</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Welcome to the Portfolio Builder</h2>
+    <p>
+      This website allows users to create and preview their own portfolio by entering personal details, skills, projects, and achievements.
+    </p>
+    <p>
+      Use the navigation above to start filling out your portfolio.
+    </p>
+
+    <div id="resumeNotice" style="margin-top: 1rem;"></div>
+
+    <button onclick="clearPortfolioData()">Clear All Data</button>
+    <a href="resume.html"><button>View My Resume</button></a>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Portfolio Builder. All rights reserved.</p>
+  </footer>
+ <script>
+    window.onload = function() {
+      const data = JSON.parse(localStorage.getItem("contactData"));
+      const container = document.getElementById("contactInfo");
+
+      if (data) {
+        container.innerHTML = `
+          <p><strong>Email:</strong> ${data.email || "Not provided"}</p>
+          <p><strong>Phone:</strong> ${data.phone || "Not provided"}</p>
+          <p><strong>LinkedIn:</strong> ${data.linkedin ? `<a href="${data.linkedin}" target="_blank">${data.linkedin}</a>` : "Not provided"}</p>
+          <p><strong>GitHub:</strong> ${data.github ? `<a href="${data.github}" target="_blank">${data.github}</a>` : "Not provided"}</p>
+        `;
+      } else {
+        container.innerHTML = "<p>No contact information found. Please fill in contact.html first.</p>";
+      }
+    }
+  </script>
+  <script>
+
+    // Clear all stored portfolio data
+    function clearPortfolioData() {
+      if (confirm("Are you sure you want to clear all saved data?")) {
+        localStorage.clear();
+        alert("All data cleared!");
+        location.reload();
+      }
+    }
+  </script>
+</body>
+</html>

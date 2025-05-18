@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skills - User Input</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    #skillsPreview {
+      margin-top: 2rem;
+      background-color: #f0f0f0;
+      padding: 1rem;
+      border-left: 4px solid #0a9396;
+    }
+    #confirmationMessage {
+      color: green;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body id="skillsPage">
+  <header>
+    <nav>
+      <h1>My Portfolio</h1>
+      <ul>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="skills.html">Skills</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="achievements.html">Achievements</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="resume.html">View My Resume</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="section">
+    <h2>Skills</h2>
+    <form onsubmit="saveSkills(); return false;">
+      <label for="skillInput">Enter your skills (comma or newline separated):</label><br>
+      <textarea id="skillInput" rows="5" cols="40" placeholder="e.g., HTML, CSS, JavaScript" required></textarea><br><br>
+      <button type="submit">Save & Preview</button>
+    </form>
+    <p id="confirmationMessage"></p>
+
+    <div id="skillsPreview" style="display: none;">
+      <h3>Your Skills:</h3>
+      <ul id="skillsList"></ul>
+    </div>
+  </section>
+
+  <script>
+    function saveSkills() {
+      const input = document.getElementById("skillInput").value.trim();
+      if (!input) {
+        alert("Please enter at least one skill.");
+        return;
+      }
+
+      const skills = input
+        .split(/\n|,/)
+        .map(skill => skill.trim())
+        .filter(skill => skill.length > 0);
+
+      localStorage.setItem("skillsData", JSON.stringify(skills));
+
+      const message = document.getElementById("confirmationMessage");
+      message.textContent = "Skills saved successfully!";
+      setTimeout(() => message.textContent = "", 3000);
+
+      displaySkills(skills);
+    }
+
+    function displaySkills(skills) {
+      const list = document.getElementById("skillsList");
+      list.innerHTML = "";
+      skills.forEach(skill => {
+        const li = document.createElement("li");
+        li.textContent = skill;
+        list.appendChild(li);
+      });
+      document.getElementById("skillsPreview").style.display = "block";
+    }
+    document.addEventListener("DOMContentLoaded", () => {
+      const storedSkills = JSON.parse(localStorage.getItem("skillsData"));
+      if (storedSkills && storedSkills.length > 0) {
+        document.getElementById("skillInput").value = storedSkills.join(", ");
+        displaySkills(storedSkills);
+      }
+    });
+  </script>
+</body>
+</html>

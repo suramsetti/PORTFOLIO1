@@ -1,0 +1,255 @@
+/* Base Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+/* Header */
+header {
+  background-color: #0a9396;
+  color: #fff;
+  padding: 1rem 2rem;
+}
+
+header h1 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  list-style: none;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Hero */
+.hero {
+  padding: 3rem 2rem;
+  text-align: center;
+  background-color: #e0f7fa;
+}
+
+/* Form Sections */
+.section {
+  padding: 2rem;
+  max-width: 800px;
+  margin: auto;
+}
+
+form label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+form input,
+form textarea {
+  width: 100%;
+  padding: 0.6rem;
+  margin-top: 0.4rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+form button {
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  background-color: #0a9396;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #047d7d;
+}
+
+/* Preview Boxes */
+#preview,
+#skillsPreview,
+#projectsPreview {
+  background-color: #f0f0f0;
+  margin-top: 2rem;
+  padding: 1rem;
+  border-left: 4px solid #0a9396;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+  background-color: #0a9396;
+  color: #fff;
+}
+/* Achievements Section */
+#achievementsForm {
+  margin-top: 1rem;
+}
+
+#achievementText {
+  min-height: 140px;
+  font-size: 1rem;
+  font-family: inherit;
+  resize: vertical;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 0.6rem;
+  transition: border-color 0.3s ease;
+}
+
+#achievementText:focus {
+  border-color: #0a9396;
+  outline: none;
+  box-shadow: 0 0 5px rgba(10, 147, 150, 0.5);
+}
+
+button {
+  margin-right: 1rem;
+}
+
+.confirmation {
+  color: #2f8f4e; /* a nice green */
+  font-weight: 600;
+  margin-top: 0.8rem;
+  font-size: 1.1rem;
+}
+
+/* Achievements Preview */
+#achievementsPreview {
+  background-color: #f0f0f0;
+  margin-top: 2rem;
+  padding: 1rem 1.5rem;
+  border-left: 5px solid #0a9396;
+  border-radius: 4px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#achievementsPreview h3 {
+  margin-bottom: 0.8rem;
+  color: #0a9396;
+}
+
+#achievementsPreview ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  color: #333;
+}
+
+#achievementsPreview ul li {
+  margin-bottom: 0.4rem;
+  line-height: 1.4;
+}
+.navbar {
+  background-color: rgba(0, 0, 0, 0.85);
+  padding: 1rem 2rem;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 999;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.6);
+}
+
+.nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.logo {
+  color: #ffdd57;
+  margin: 0;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+  color: #ffdd57;
+}
+
+.overlay {
+  padding-top: 100px; /* Prevent content from being hidden behind navbar */
+}
+/* Navbar Styling */
+.navbar {
+  background-color: rgba(0, 0, 0, 0.85);
+  padding: 1rem 2rem;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.6);
+}
+
+.nav-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  color: #ffdd57;
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+  color: #ffdd57;
+}
+
+/* Add top padding to body content so it's not hidden behind navbar */
+body {
+  padding-top: 80px;
+}

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Me - User Profile</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    #preview {
+      margin-top: 2rem;
+      padding: 1rem;
+      background-color: #f0f0f0;
+      border-left: 4px solid #0a9396;
+    }
+  </style>
+</head>
+<body id="aboutPage">
+  <header>
+    <nav>
+      <h1>My Portfolio</h1>
+      <ul>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="skills.html">Skills</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="achievements.html">Achievements</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="resume.html">View My Resume</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="about" class="section">
+    <h2>About Me</h2>
+
+    <form id="aboutForm">
+      <label>
+        Full Name:
+        <input type="text" id="fullName" required />
+      </label><br><br>
+      
+      <label>
+        Short Bio:
+        <textarea id="bio" rows="5" required></textarea>
+      </label><br><br>
+
+      <button type="submit">Save & Preview</button>
+    </form>
+    <form id="aboutForm">
+  <input type="text" id="name" placeholder="Your Name" />
+  <input type="text" id="bio" placeholder="Short Bio" />
+  <button type="submit">Save</button>
+</form>
+    <div id="preview" style="display: none;">
+      <h3>Preview:</h3>
+      <p><strong>Name:</strong> <span id="displayName"></span></p>
+      <p><strong>Bio:</strong> <span id="displayBio"></span></p>
+    </div>
+  </section>
+  <script>
+    // Load stored data if available
+    function loadAboutData() {
+      const data = JSON.parse(localStorage.getItem("aboutData"));
+      if (data) {
+        document.getElementById("fullName").value = data.fullName || "";
+        document.getElementById("bio").value = data.bio || "";
+
+        document.getElementById("displayName").textContent = data.fullName;
+        document.getElementById("displayBio").textContent = data.bio;
+        document.getElementById("preview").style.display = "block";
+      }
+    }
+    
+
+    // Save data and show preview
+    document.getElementById("aboutForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById("fullName").value.trim();
+      const bio = document.getElementById("bio").value.trim();
+
+      // Save to localStorage
+      const aboutData = {
+        fullName: name,
+        bio: bio
+      };
+      localStorage.setItem("aboutData", JSON.stringify(aboutData));
+
+      // Show preview
+      document.getElementById("displayName").textContent = name;
+      document.getElementById("displayBio").textContent = bio;
+      document.getElementById("preview").style.display = "block";
+    });
+
+    // Load data on page load
+    document.addEventListener("DOMContentLoaded", loadAboutData);
+    localStorage.setItem("userName", document.getElementById("name").value.trim());
+    function saveAbout() {
+  const name = document.getElementById("name").value.trim();
+  const bio = document.getElementById("bio").value.trim();
+
+  localStorage.setItem("userName", name);
+  localStorage.setItem("bio", bio);
+
+  alert("About Me info saved!");
+}
+    // Replace "Your Name" in footer with actual name
+const storedName = localStorage.getItem("userName");
+if (storedName) {
+  document.getElementById("footerName").textContent = storedName;
+}
+ </script>
+ <script>
+  document.getElementById("aboutForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const aboutData = {
+      name: document.getElementById("name").value,
+      bio: document.getElementById("bio").value
+    };
+    localStorage.setItem("about", JSON.stringify(aboutData));
+    alert("About Me saved!");
+  });
+</script>
+</body>
+</html>

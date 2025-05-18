@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Resume</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.75);
+      min-height: 100vh;
+      padding: 3rem 1rem;
+    }
+
+    .resume-container {
+      max-width: 800px;
+      margin: auto;
+      background-color: rgba(255, 255, 255, 0.05);
+      padding: 2rem;
+      border-radius: 10px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .resume-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .resume-header h1 {
+      margin-bottom: 0.3rem;
+      font-size: 2.5rem;
+    }
+
+    .resume-header p {
+      margin: 0.3rem 0;
+      color: #ccc;
+    }
+
+    .resume-section {
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 5px;
+      margin-bottom: 0.8rem;
+      color: #ffdd57;
+    }
+
+    ul {
+      list-style: disc;
+      padding-left: 1.5rem;
+    }
+
+    .btn-back {
+      display: block;
+      margin: 2rem auto 0;
+      padding: 0.7rem 1.5rem;
+      background: #ffdd57;
+      color: #333;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .btn-back:hover {
+      background: #ffc107;
+    }
+
+    a {
+      color: #90cdf4;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .projectCard {
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+      background: #f2f2f2;
+      border-left: 4px solid #2196f3;
+    }
+
+    #resumeContact {
+      margin-top: 2rem;
+      background-color: #f9f9f9;
+      padding: 1rem;
+      border-left: 4px solid #0a9396;
+    }
+
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-content">
+      <h3 class="logo">My Portfolio</h3>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#resumeStart">View My Resume</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="overlay" id="resumeStart">
+    <div class="resume-container">
+      <div class="resume-header">
+        <h1 id="resumeName">Your Name</h1>
+        <p id="resumeProfession">Your Profession</p>
+        <p id="resumeBio">Short Bio</p>
+      </div>
+      
+      <div class="resume-section" id="skillsSection">
+        <h2>Skills</h2>
+        <ul id="skillsList"></ul>
+      </div>
+
+      <div class="resume-section" id="projectsSection">
+        <h2>Projects</h2>
+        <ul id="projectsList"></ul>
+      </div>
+
+      <div class="resume-section" id="achievementsSection">
+        <h2>Achievements</h2>
+        <ul id="achievementsList"></ul>
+      </div>
+
+      <div class="resume-section" id="contactSection">
+        <h2>Contact</h2>
+        <p><strong>Email:</strong> <span id="email">Not provided</span></p>
+        <p><strong>GitHub:</strong> <a id="githubLink" target="_blank">Not provided</a></p>
+        <p><strong>LinkedIn:</strong> <a id="linkedinLink" target="_blank">Not provided</a></p>
+      </div>
+
+      <a href="index.html" class="btn-back">← Back to Home</a>
+    </div>
+  </div>
+
+  <script>
+    // Load About Section
+// Load About Section
+const userName = localStorage.getItem("aboutName") || "Your Name";
+document.getElementById("resumeName").textContent = userName;
+document.title = `${userName} - My Resume`;
+
+document.getElementById("resumeProfession").textContent =
+  localStorage.getItem("aboutProfession") || "Your Profession";
+document.getElementById("resumeBio").textContent =
+  localStorage.getItem("aboutBio") || "Short Bio";
+
+
+    // Load Skills
+    const skillsList = document.getElementById("skillsList");
+    const skills = JSON.parse(localStorage.getItem("skillsData") || "[]");
+    if (skills.length === 0) {
+      skillsList.innerHTML = "<li>No skills added.</li>";
+    } else {
+      skills.forEach(skill => {
+        const li = document.createElement("li");
+        li.textContent = skill;
+        skillsList.appendChild(li);
+      });
+    }
+
+    // Load Projects
+    const projectsList = document.getElementById("projectsList");
+    const projects = JSON.parse(localStorage.getItem("projectsData") || "[]");
+    if (projects.length === 0) {
+      projectsList.innerHTML = "<li>No projects added.</li>";
+    } else {
+      projects.forEach(project => {
+        const li = document.createElement("li");
+        li.innerHTML = `<strong>${project.title}</strong>: ${project.description} (<a href="${project.link}" target="_blank">Link</a>)`;
+        projectsList.appendChild(li);
+      });
+    }
+
+    // Load Achievements
+    const achievementsList = document.getElementById("achievementsList");
+    const achievements = JSON.parse(localStorage.getItem("achievementsData") || "[]");
+    if (achievements.length === 0) {
+      achievementsList.innerHTML = "<li>No achievements added.</li>";
+    } else {
+      achievements.forEach(achievement => {
+        const li = document.createElement("li");
+        li.textContent = achievement;
+        achievementsList.appendChild(li);
+      });
+    }
+
+    // Load Contact Information
+    const email = localStorage.getItem("contactEmail");
+    const github = localStorage.getItem("contactGitHub");
+    const linkedin = localStorage.getItem("contactLinkedIn");
+
+    if (email) document.getElementById("email").textContent = email;
+
+    const githubLink = document.getElementById("githubLink");
+    if (github) {
+      githubLink.href = github;
+      githubLink.textContent = "View GitHub";
+    } else {
+      githubLink.removeAttribute("href");
+    }
+
+    const linkedinLink = document.getElementById("linkedinLink");
+    if (linkedin) {
+      linkedinLink.href = linkedin;
+      linkedinLink.textContent = "View LinkedIn";
+    } else {
+      linkedinLink.removeAttribute("href");
+    }
+  </script>
+
+</body>
+</html>

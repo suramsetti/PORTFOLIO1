@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Achievements | Portfolio Builder</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .confirmation {
+      color: green;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    #achievementsPreview {
+      margin-top: 20px;
+      border-top: 1px solid #ccc;
+      padding-top: 10px;
+    }
+  </style>
+</head>
+<body id="achievementsPage">
+  <header>
+    <nav>
+      <h1>Portfolio Builder</h1>
+      <ul>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="skills.html">Skills</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="achievements.html" class="active">Achievements</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="resume.html">View My Resume</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="section">
+    <h2>Enter Your Achievements</h2>
+    <form id="achievementsForm" onsubmit="return false;">
+      <label for="achievementText">Describe your achievements:</label>
+      <textarea id="achievementText" rows="6" placeholder="E.g., Winner of XYZ Hackathon, Certified in ABC Tech, etc."></textarea>
+      <br />
+      <button type="button" onclick="saveAchievements()">Save</button>
+      <button type="button" onclick="previewAchievements()">Preview</button>
+    </form>
+
+    <div id="confirmationMessage" class="confirmation"></div>
+    <div id="achievementsPreview"></div>
+  </section>
+
+
+  <script>
+    function saveData(formId, keys) {
+      const data = {};
+      keys.forEach(key => {
+        const el = document.getElementById(key);
+        if (el) data[key] = el.value;
+      });
+      localStorage.setItem(formId, JSON.stringify(data));
+    }
+
+    function loadData(formId, keys) {
+      const data = JSON.parse(localStorage.getItem(formId));
+      if (data) {
+        keys.forEach(key => {
+          const el = document.getElementById(key);
+          if (el && data[key]) el.value = data[key];
+        });
+      }
+    }
+
+   function saveAchievements() {
+  const text = document.getElementById("achievementText").value.trim();
+  if (!text) {
+    alert("Please enter your achievements before saving.");
+    return;
+  }
+
+  const items = text.split(/\n|,/).map(a => a.trim()).filter(a => a.length > 0);
+  localStorage.setItem("achievementsData", JSON.stringify(items));
+
+  const confirmation = document.getElementById("confirmationMessage");
+  confirmation.textContent = "Achievements saved successfully!";
+  setTimeout(() => confirmation.textContent = "", 3000);
+}
+
+
+    function previewAchievements() {
+      const text = document.getElementById("achievementText").value.trim();
+      if (!text) {
+        alert("Please enter your achievements.");
+        return;
+      }
+
+      const items = text.split(/\n|,/).map(a => a.trim()).filter(a => a.length > 0);
+      const preview = document.getElementById("achievementsPreview");
+      preview.innerHTML = `<h3>Preview:</h3><ul>${items.map(a => `<li>${a}</li>`).join("")}</ul>`;
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      loadData("achievementsForm", ["achievementText"]);
+      if (document.getElementById("achievementText").value.trim()) {
+        previewAchievements();
+      }
+    });
+  </script>
+</body>
+</html>
